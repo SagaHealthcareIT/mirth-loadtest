@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><codeTemplate version="3.8.0">
+  <id>fb534784-9885-4be9-a6f9-4f7c0bd5c590</id>
+  <name>randomDate(start,end)</name>
+  <revision>1</revision>
+  <lastModified>
+    <time>1613339648030</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <contextSet>
+    <delegate>
+      <contextType>DESTINATION_DISPATCHER</contextType>
+      <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+      <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+      <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+      <contextType>SOURCE_RECEIVER</contextType>
+    </delegate>
+  </contextSet>
+  <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+    <type>FUNCTION</type>
+    <code>/**
+	Modify the description here. Modify the function name and parameters as needed. One function per
+	template is recommended; create a new code template for each new function.
+
+	@param {String} arg1 - arg1 description
+	@return {String} return description
+*/
+
+function randomDate(start, end) {
+    var d = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length &lt; 2) month = '0' + month;
+    if (day.length &lt; 2) day = '0' + day;
+
+    return [year, month, day].join('');
+}
+</code>
+  </properties>
+</codeTemplate>

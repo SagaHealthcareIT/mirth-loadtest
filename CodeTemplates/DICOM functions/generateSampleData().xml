@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><codeTemplate version="3.8.0">
+  <id>64e7c4b5-63b5-4db4-a4ca-55e998e0f904</id>
+  <name>generateSampleData()</name>
+  <revision>1</revision>
+  <lastModified>
+    <time>1613460365130</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <contextSet>
+    <delegate>
+      <contextType>DESTINATION_DISPATCHER</contextType>
+      <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+      <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+      <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+      <contextType>SOURCE_RECEIVER</contextType>
+    </delegate>
+  </contextSet>
+  <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+    <type>FUNCTION</type>
+    <code>/**
+	Modify the description here. Modify the function name and parameters as needed. One function per
+	template is recommended; create a new code template for each new function.
+
+	@param {String} arg1 - arg1 description
+	@return {String} return description
+*/
+function generateSampleData() {
+	
+	// Patient ID
+	var patientId = DateUtil.getCurrentDate("hhmmssSSS"); 
+	channelMap.put('patientId', patientId);
+	
+	var accession = Math.floor(Math.random() * 10000000000);
+	channelMap.put('accession', accession);
+	
+	// Patient Name
+	var patientName = generateName().toUpperCase();
+	
+	var patientFirstName = patientName.split(" ")[0];
+	channelMap.put('patientFirstName', patientFirstName);
+	
+	var patientLastName = patientName.split(" ")[1];
+	channelMap.put('patientLastName', patientLastName);
+	
+	// Series UID
+	var seriesUID = '';
+	var dateString = DateUtil.getCurrentDate("yyyymmddhhmmssSSS");
+	var dateString1 = DateUtil.getCurrentDate("yyyymmddhh");
+	var dateString2 = DateUtil.getCurrentDate("hhmmssSSS");
+	var seriesUID = '1.3.6.1.4.1.11157.' + dateString + '.' + dateString1 + '.' + dateString2;
+	channelMap.put('seriesUID', seriesUID);
+	
+	// Study UID
+	var studyUID = '';
+	var dateString = DateUtil.getCurrentDate("yyyymmddhhmmssSSS");
+	var dateString1 = DateUtil.getCurrentDate("yyyymmddhh");
+	var dateString2 = DateUtil.getCurrentDate("hhmmssSSS");
+	var studyUID = '1.3.6.1.4.1.1115.' + dateString + '.' + dateString1 + '.' + dateString2;
+	channelMap.put('studyUID', studyUID);
+	
+	// Visit UID
+	var visitUID = '';
+	var dateString = DateUtil.getCurrentDate("yyyymmddhhmmssSSS");
+	var dateString1 = DateUtil.getCurrentDate("yyyymmddhh");
+	var dateString2 = DateUtil.getCurrentDate("hhmmssSSS");
+	var visitUID = '1.3.6.1.4.1.1115.' + dateString + '.' + dateString1 + '.' + dateString2;
+	channelMap.put('visitUID', visitUID);
+	
+	// MSH 10 
+	channelMap.put('msh10', DateUtil.getCurrentDate("YYYYMMDDHHmmssSSS"));
+	
+	// Generate Random DOB
+	function randomDate(start, end) {
+	    var d = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())),
+	        month = '' + (d.getMonth() + 1),
+	        day = '' + d.getDate(),
+	        year = d.getFullYear();
+	
+	    if (month.length &lt; 2) month = '0' + month;
+	    if (day.length &lt; 2) day = '0' + day;
+	
+	    return [year, month, day].join('');
+	}
+	
+	var randomDate = randomDate(new Date(1960, 0, 1), new Date());
+	channelMap.put('randomDate', randomDate)
+}</code>
+  </properties>
+</codeTemplate>

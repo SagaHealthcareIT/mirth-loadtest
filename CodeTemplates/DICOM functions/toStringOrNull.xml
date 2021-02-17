@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><codeTemplate version="3.8.0">
+  <id>3d61dc8c-adb3-4b14-92f8-57a4c25f3b07</id>
+  <name>toStringOrNull</name>
+  <revision>1</revision>
+  <lastModified>
+    <time>1612823563424</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <contextSet>
+    <delegate>
+      <contextType>DESTINATION_DISPATCHER</contextType>
+      <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+      <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+      <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+      <contextType>SOURCE_RECEIVER</contextType>
+    </delegate>
+  </contextSet>
+  <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+    <type>FUNCTION</type>
+    <code>/**
+	Attempts to coerce the parameter to a string but returns null if the value is empty, null, or undefined
+
+	@param {String} arg1 - arg1 description
+	@return {String} return description
+*/
+function toStringOrNull(str) {
+	if(!str) return null;
+	var result = str.toString();
+	
+	if(!result || result == '' || result == undefined || result == 'null') {
+		return null;
+	}
+	return result;
+}</code>
+  </properties>
+</codeTemplate>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><codeTemplate version="3.8.0">
+  <id>1c65f790-7dfb-447d-971a-b348d18b8525</id>
+  <name>setDICOMTags</name>
+  <revision>21</revision>
+  <lastModified>
+    <time>1613494610829</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <contextSet>
+    <delegate>
+      <contextType>DESTINATION_DISPATCHER</contextType>
+      <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+      <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+      <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+      <contextType>SOURCE_RECEIVER</contextType>
+    </delegate>
+  </contextSet>
+  <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+    <type>FUNCTION</type>
+    <code>/**
+	setDICOMTags
+*/
+function setDICOMTags() {
+
+	// Patient Id
+	tmp['tag00100020'].setChildren($('patientId'));
+	
+	// Patient Name	
+	tmp['tag00100010'].setChildren($('patientLastName') + "^" + $('patientFirstName') + "^^^^^");
+	
+	// Patient DOB
+	tmp['tag00100030'].setChildren($('randomDate'));
+	
+	// Patient Gender
+	tmp['tag00100040'].setChildren('F'); //$('hisPatientGender')
+	
+	// Visit Number
+	//tmp['tag00380010'].setChildren($('visitUID'));
+	
+	// Study Instance 
+	tmp['tag0020000D'].setChildren($('studyUID'));
+	
+	// Series Instance
+	tmp['tag0020000E'].setChildren($('seriesUID'));
+	
+	//Instance Number
+	tmp['tag00200013'].setChildren('1');
+}</code>
+  </properties>
+</codeTemplate>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><channelGroup version="3.8.0">
+  <id>8ac60504-9c4a-4096-b631-88ee9e72b3f2</id>
+  <name>SomeOldStuff</name>
+  <revision>5</revision>
+  <lastModified>
+    <time>1611861248217</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <description/>
+  <channels>
+    <channel version="3.8.0">
+      <id>734f1ad8-8ce4-4647-8d9c-88909a9d247c</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>f0f4b8a5-b9ff-4ae0-9aa8-c4a688ef1af2</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>c787f8bb-2d8a-492c-aa75-249b5e8d7056</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>46fc0f95-f894-4775-8f84-3dd8651f6fba</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>c5884e1c-277b-456b-a7ad-c12afb189494</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>dfb39151-faa4-4ecb-92d6-9cba480521b6</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>88f8e8c6-c4e5-4175-8ab8-6cd949701d62</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>7d8e6c47-b4cf-4c3a-89df-7963ef5d8a2a</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>66cdcf23-15b6-4f76-a540-03519bf91e3d</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>83e24da6-724c-4288-96b1-9314b9715edd</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>40e47393-bd6b-43e1-939c-1a6fac8eb4db</id>
+      <revision>0</revision>
+    </channel>
+  </channels>
+</channelGroup>

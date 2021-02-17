@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><codeTemplateLibrary version="3.8.0">
+  <id>ed53e423-f674-4dc5-821e-0160156842ed</id>
+  <name>DICOM functions</name>
+  <revision>10</revision>
+  <lastModified>
+    <time>1613493629547</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <description/>
+  <includeNewChannels>false</includeNewChannels>
+  <enabledChannelIds>
+    <string>6804319b-22ff-423f-94a9-3b3459da7bba</string>
+    <string>ba6562f2-4bf7-4641-86e6-415a6b4a62f9</string>
+  </enabledChannelIds>
+  <disabledChannelIds>
+    <string>c787f8bb-2d8a-492c-aa75-249b5e8d7056</string>
+    <string>66cfeefe-e0ce-46a7-b820-2f589629e4b7</string>
+    <string>46fc0f95-f894-4775-8f84-3dd8651f6fba</string>
+    <string>88f8e8c6-c4e5-4175-8ab8-6cd949701d62</string>
+    <string>66cdcf23-15b6-4f76-a540-03519bf91e3d</string>
+    <string>40e47393-bd6b-43e1-939c-1a6fac8eb4db</string>
+    <string>cbcae144-15fa-4ec5-bdad-ef85de834354</string>
+    <string>c5884e1c-277b-456b-a7ad-c12afb189494</string>
+    <string>7d8e6c47-b4cf-4c3a-89df-7963ef5d8a2a</string>
+    <string>734f1ad8-8ce4-4647-8d9c-88909a9d247c</string>
+    <string>83e24da6-724c-4288-96b1-9314b9715edd</string>
+    <string>dfb39151-faa4-4ecb-92d6-9cba480521b6</string>
+    <string>f0f4b8a5-b9ff-4ae0-9aa8-c4a688ef1af2</string>
+  </disabledChannelIds>
+  <codeTemplates>
+    <codeTemplate version="3.8.0">
+      <id>3356a25a-27c0-401d-ad28-f79dd6a26d74</id>
+    </codeTemplate>
+    <codeTemplate version="3.8.0">
+      <id>64e7c4b5-63b5-4db4-a4ca-55e998e0f904</id>
+    </codeTemplate>
+    <codeTemplate version="3.8.0">
+      <id>5a3978a8-4768-480f-ab19-52fcdeca429b</id>
+    </codeTemplate>
+    <codeTemplate version="3.8.0">
+      <id>fb534784-9885-4be9-a6f9-4f7c0bd5c590</id>
+    </codeTemplate>
+    <codeTemplate version="3.8.0">
+      <id>1c65f790-7dfb-447d-971a-b348d18b8525</id>
+    </codeTemplate>
+    <codeTemplate version="3.8.0">
+      <id>3d61dc8c-adb3-4b14-92f8-57a4c25f3b07</id>
+    </codeTemplate>
+  </codeTemplates>
+</codeTemplateLibrary>
