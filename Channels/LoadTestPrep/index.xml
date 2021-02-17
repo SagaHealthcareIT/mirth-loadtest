@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><channelGroup version="3.8.0">
+  <id>74d1e780-e0eb-4f22-af3b-bff5ec9609cc</id>
+  <name>LoadTestPrep</name>
+  <revision>4</revision>
+  <lastModified>
+    <time>1613347655370</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <description>This generates related HL7 and DICOM for load test preparation</description>
+  <channels>
+    <channel version="3.8.0">
+      <id>ba6562f2-4bf7-4641-86e6-415a6b4a62f9</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>66cfeefe-e0ce-46a7-b820-2f589629e4b7</id>
+      <revision>0</revision>
+    </channel>
+    <channel version="3.8.0">
+      <id>6804319b-22ff-423f-94a9-3b3459da7bba</id>
+      <revision>0</revision>
+    </channel>
+  </channels>
+</channelGroup>

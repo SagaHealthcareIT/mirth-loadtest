@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><codeTemplate version="3.8.0">
+  <id>5a3978a8-4768-480f-ab19-52fcdeca429b</id>
+  <name>loadMapsFromDICOM</name>
+  <revision>11</revision>
+  <lastModified>
+    <time>1613339190376</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <contextSet>
+    <delegate>
+      <contextType>DESTINATION_DISPATCHER</contextType>
+      <contextType>SOURCE_FILTER_TRANSFORMER</contextType>
+      <contextType>DESTINATION_RESPONSE_TRANSFORMER</contextType>
+      <contextType>DESTINATION_FILTER_TRANSFORMER</contextType>
+      <contextType>SOURCE_RECEIVER</contextType>
+    </delegate>
+  </contextSet>
+  <properties class="com.mirth.connect.model.codetemplates.BasicCodeTemplateProperties">
+    <type>FUNCTION</type>
+    <code>/**
+	Loads the channel map from DICOM
+*/
+function loadMapsFromDICOM() {
+
+	//logger.info('loadMapsFromDICOM');
+	for each (seg in msg.children()) {
+	 	//logger.debug('iterating msg children: ' + seg.toString());
+	 	
+	 	if (seg.name().toString() == "SEG") {
+	 		var sample_value = seg['SEG.1']['SEG.1.1'].toString();
+		}
+	}
+	
+	//logger.debug('entire msg: ' + msg.toString());
+
+	// patient table
+	var patientID = toStringOrNull(msg['tag00100020']);
+	channelMap.put('hisPatientID', patientID);
+	//logger.debug('Patient ID: ' + channelMap.get('hisPatientID'));	
+
+	// name needs to be parsed! might need to parse patient name for prefix/suffix
+	var patientName = toStringOrNull(msg['tag00100010']);
+	//logger.debug('patientName pre-string-split: ' + patientName);
+	if(!patientName) {
+		patientName = '';
+	}
+	patientName = patientName.split("^");
+	
+	channelMap.put('hisPatientLastName', toStringOrNull(patientName[0]));
+	//logger.debug('Patient Last name: ' + channelMap.get('hisPatientLastName'));
+	
+	channelMap.put('hisPatientFirstName', toStringOrNull(patientName[1]));
+	//logger.debug('Patient First name: ' + channelMap.get('hisPatientFirstName'));
+	
+	channelMap.put('hisPatientMiddleName', toStringOrNull(patientName[2]));
+	//logger.debug('Patient Middle name: ' + channelMap.get('hisPatientMiddleName'));
+	
+	channelMap.put('hisPatientPrefix', toStringOrNull(patientName[3]));
+	//logger.debug('Patient prefix: ' + channelMap.get('hisPatientPrefix'));
+	
+	channelMap.put('hisPatientSuffix', toStringOrNull(patientName[4]));
+	//logger.debug('Patient suffix: ' + channelMap.get('hisPatientSuffix'));
+	
+	// What should title in hispatients be? Seeing 'Honorable', 'Rev', 'Mrs', 'Dr' in the test database
+	channelMap.put('hisPatientTitle', null);
+	//logger.debug('Patient Title: ' + channelMap.get('hisPatientTitle'));
+	
+	var patientDOB = toStringOrNull(msg['tag00100030']);
+	channelMap.put('hisPatientDOB', patientDOB);
+	//logger.debug('Patient DOB: ' + patientDOB);
+	
+	var patientGender = toStringOrNull(msg['tag00100040']);
+	//logger.debug('Raw patient gender: ' + patientGender);
+	
+	if(patientGender) {
+		patientGender = patientGender.toLocaleLowerCase().trim();
+		if(patientGender.indexOf('f') == 0)
+			patientGender = 'Female';
+		else if(patientGender.indexOf('m') == 0)
+			patientGender = 'Male';
+		else if(patientGender.indexOf('o') == 0)
+			patientGender = null;
+	}
+	channelMap.put('hisPatientGender', patientGender);
+	//logger.debug('Patient Gender: ' + patientGender);
+	
+	// following doesn't exist in current dicom message will probably need to parse
+	var patientAddress = toStringOrNull(msg['tag00101040']);
+	patientAddress = '1200 N ELM STREET^^GREENSBORO^NC^27401-1020'; //Testing
+	
+	if(!patientAddress) {
+		patientAddress = '';
+	}
+	patientAddress = patientAddress.split("^");
+	var patientAddress1 = toStringOrNull(patientAddress[0]);
+	channelMap.put('hisPatientAddress1', patientAddress1);
+	//logger.debug('Patient address1: ' + patientAddress1);
+	
+	var patientAddress2 = toStringOrNull(patientAddress[1]);
+	channelMap.put('hisPatientAddress2', patientAddress2);
+	//logger.debug('Patient address2: ' + patientAddress2);
+	
+	var patientCity = toStringOrNull(patientAddress[2]);
+	channelMap.put('hisPatientCity', patientCity);
+	//logger.debug('Patient City: ' + patientCity);
+	
+	var patientProvince = toStringOrNull(patientAddress[3]);
+	channelMap.put('hisPatientProvince', patientProvince);
+	//logger.debug('Patient Province: ' + patientProvince);
+	
+	var patientZip = toStringOrNull(patientAddress[4]);
+	channelMap.put('hisPatientZip', patientZip);
+	//logger.debug('Patient Zip: ' + patientZip);
+	
+	var patientWeight = toStringOrNull(msg['tag00101030']);
+	channelMap.put('hisPatientWeight', patientWeight);
+	//logger.debug('Patient weight: ' + patientWeight);
+	
+	var patientWeightUnit = 'kg';
+	channelMap.put('hisPatientWeightUnit', patientWeightUnit);
+	//logger.debug('Patient weight Unit: ' + patientWeightUnit);
+	
+	var patientHeight = toStringOrNull(msg['tag00101020']);
+	channelMap.put('hisPatientHeight', patientHeight);
+	//logger.debug('Patient Height: ' + patientHeight);
+	
+	var patientHeightUnit = 'm';
+	channelMap.put('hisPatientHeightUnit', patientHeightUnit);
+	//logger.debug('Patient height Unit: ' + patientHeightUnit);
+
+	//Added below two tags on 10-13-2020 ~Brandon
+	var patientOrientation = toStringOrNull(msg['tag00200037']);
+	channelMap.put('hisPatientOrientation', patientOrientation);
+	//logger.debug('Patient Orientation: ' + patientOrientation);
+
+	var patientPosition = toStringOrNull(msg['tag00200032']);
+	channelMap.put('hisPatientPosition', patientPosition);
+	//logger.debug('Patient Position: ' + patientPosition);
+
+	// UC Health Hospital ID = 3
+	var hospitalId = globalChannelMap.get('hospitalId');
+	channelMap.put('hisHospitalId', hospitalId);
+	//logger.debug('Hospital ID: ' + hospitalId);
+	
+	var hospitalName = toStringOrNull(msg['tag00080080']);
+	channelMap.put('hisHospitalName', hospitalName);
+	//logger.debug('Hospital name: ' + hospitalName);
+
+	// visit table - visit number needs to be looked into
+	var visitNumber = toStringOrNull(msg['tag00380010']);
+	channelMap.put('hisVisitNumber', visitNumber);
+	//logger.debug('Visit Number (admission id): ' + visitNumber);
+	
+	// order table - order number needs to be looked into
+	
+	// replacing the following with accession number
+	var orderNumber = toStringOrNull(msg['tag00402016']);
+	channelMap.put('hisOrderNumber', orderNumber);
+	//logger.debug('Order Number (placer order number/imaging service request): ' + orderNumber);
+	
+	var accessionNumber = toStringOrNull(msg['tag00080050']);
+	channelMap.put('accessionNumber', accessionNumber);
+	//logger.debug('Order Number (accession number): ' + orderNumber);
+	
+	// we need to see if order date is available, using null for now
+	//TODO: remove this later -- its for testing while their is a not null constraint
+	//channelMap.put('hisOrderDateTime', DateUtil.getCurrentDate('yyyy-MM-dd HH:mm:ss'));
+	
+	var studyInstanceUID = toStringOrNull(msg['tag0020000D']);	
+	var seriesInstanceUID = toStringOrNull(msg['tag0020000e']);
+	
+	var sliceThickness = toStringOrNull(msg['tag00180050']);
+	channelMap.put('hisSliceThickness', sliceThickness);
+	//logger.debug('Slice Thickness: ' + sliceThickness);
+
+	var seriesDescription = toStringOrNull(msg['tag0008103E']);
+	channelMap.put('hisSeriesDescription', seriesDescription);
+	//logger.debug('Series Description: ' + seriesDescription);
+	
+	var seriesNumber = toStringOrNull(msg['tag00200011']);
+	channelMap.put('hisSeriesNumber', seriesNumber);
+	//logger.debug('Series Number: ' + seriesNumber);
+	
+	var instanceNumber = toStringOrNull(msg['tag00200013']);	
+	channelMap.put('hisInstanceNumber', instanceNumber);
+	//logger.debug('Instance Number: ' + instanceNumber);
+	
+	/*var dicomUrl = 's3://med-hub-us-staging/pacs/images/test2-' + dicomFileName;
+	channelMap.put('hisDicomUrl', dicomUrl);
+	logger.debug('DICOM URL: ' + dicomUrl);*/
+	
+	var studyInstanceUID = toStringOrNull(msg['tag0020000D']);
+	channelMap.put('hisStudyInstanceUID', studyInstanceUID);
+	//logger.debug('Study Instance UID: ' + studyInstanceUID);
+	
+	if(!visitNumber) {
+		channelMap.put('hisVisitNumber', studyInstanceUID);
+	}
+	
+	var seriesInstanceUID = toStringOrNull(msg['tag0020000E']);
+	channelMap.put('hisSeriesInstanceUID', seriesInstanceUID);
+	//logger.debug('Series Instance UID: ' + seriesInstanceUID);
+	
+	var studyDate = toStringOrNull(msg['tag00080020']);
+	channelMap.put('hisStudyDate', studyDate);
+	//logger.debug('Study Date: ' + studyDate);
+	
+	var modality = toStringOrNull(msg['tag00080060']);
+	channelMap.put('hisModality', modality);
+	//logger.debug('Modality: ' + modality);
+	
+	var bodyPart = toStringOrNull(msg['tag00180015']);
+	channelMap.put('hisBodyPart', bodyPart);
+	//logger.debug('Body Part: ' + bodyPart);
+	
+	var studyDescription = toStringOrNull(msg['tag00081030']);
+	channelMap.put('hisStudyDescription', studyDescription);
+	//logger.debug('Study Description: ' + studyDescription);
+	
+	var referringPhysiciansName = toStringOrNull(msg['tag00080090']);
+	//logger.debug('Raw referring physician: ' + referringPhysiciansName);
+	if(referringPhysiciansName) {
+		referringPhysiciansName = referringPhysiciansName.split("^");
+		var fullName = '';
+		if(toStringOrNull(referringPhysiciansName[1])) {
+			fullName += referringPhysiciansName[1];
+		}
+		if(toStringOrNull(referringPhysiciansName[0])) {
+			if(fullName != '') {
+				fullName += ' ';
+			}
+			fullName += referringPhysiciansName[0];
+		}
+		referringPhysiciansName = fullName;
+	}
+	channelMap.put('hisReferringPhysiciansName', referringPhysiciansName);
+	//logger.debug('ReferringPhysicians name: ' + referringPhysiciansName);
+
+	var pixelSpacing = toStringOrNull(msg['tag00280030']); //Pixel Spacing
+	//logger.debug('DICOM tag 00280030: ' + pixelSpacing);
+	if(pixelSpacing == null) 
+		pixelSpacing = toStringOrNull(msg['tag00181164']); //Imager Pixel Spacing
+		//logger.debug('DICOM tag 00181164: ' + pixelSpacing);
+	if(pixelSpacing == null) {
+		var pixelSpacingFail = globalChannelMap.get('pixelSpacingFail');
+		if(pixelSpacingFail == true) {
+			throw ('Pixel spacing not found');
+		}
+	}
+	channelMap.put('pixelSpacing', pixelSpacing);
+	//logger.debug('pixelSpacing: ' + pixelSpacing);
+}</code>
+  </properties>
+</codeTemplate>

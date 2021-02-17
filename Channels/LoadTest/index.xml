@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><channelGroup version="3.8.0">
+  <id>d3c9e801-4f63-4202-9e1d-8565200621e0</id>
+  <name>LoadTest</name>
+  <revision>2</revision>
+  <lastModified>
+    <time>1611860465517</time>
+    <timezone>Etc/UTC</timezone>
+  </lastModified>
+  <description>This is the actual load test</description>
+  <channels>
+    <channel version="3.8.0">
+      <id>cbcae144-15fa-4ec5-bdad-ef85de834354</id>
+      <revision>0</revision>
+    </channel>
+  </channels>
+</channelGroup>
